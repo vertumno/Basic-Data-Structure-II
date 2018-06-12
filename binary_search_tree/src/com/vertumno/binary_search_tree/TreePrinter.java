@@ -1,5 +1,10 @@
+package com.vertumno.binary_search_tree;
+
 /**
+ * This class was first developed by
  * @author Saiteja Tokala
+ * and adapted to this project by
+ * @author Lucas Dantas.
  */
 import java.util.ArrayList;
 import java.util.List;
