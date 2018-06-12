@@ -1,10 +1,12 @@
 public class BinarySearchTree
 {
     public static Node root;
+    private int size;
 
     public BinarySearchTree ()
     {
         root = null;
+        size = 0;
     }
 
     public void insert (Object data)
@@ -16,6 +18,7 @@ public class BinarySearchTree
         if ( root == null )
         {
             root = next;
+            this.size++;
             return;
         }
 
@@ -43,6 +46,7 @@ public class BinarySearchTree
                 if ( jumper == null )
                 {
                    beforeJumper.left = next;
+                   this.size++;
                    return;
                 }
             }
@@ -54,6 +58,7 @@ public class BinarySearchTree
                 if ( jumper == null )
                 {
                     beforeJumper.right = next;
+                    this.size++;
                     return;
                 }
             }
@@ -76,6 +81,6 @@ public class BinarySearchTree
 
     public void printTree()
     {
-
+        TreePrinter.print(root);
     }
 }
