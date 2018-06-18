@@ -6,7 +6,19 @@ In the present repository I'm storing the codes created to implement a Radix Tri
 
 ## Implemented functions
 
+* <code>public void insert(String data)</code> - Receives one string with the word to be stored and saves it on the Trie;
+* <code>public boolean search(String word)</code> - Searches if a given word exists on the Trie;
+* <code>public void print()</code> - Prints all the words stored within the Trie;
+* <code>public ArrayList<String> getWordsFromPrefix(String prefix)</code> - Receives a prefix (it does not matter if the prefix is a full word) and searchs for all words derived from this prefix.
+* <code>public boolean delete(String word)</code> - Deletes a given word from within the Trie.
 
+There are some private helper functions, you can find them by checking the <code>RadixTrie.java</code> file.
+
+Also, do not forget to check out <code>Node.java</code>, the Node structure was hidden from this README. 
+
+## Compiling and running
+
+The main focus was to provide the source code of the project. You can add them to Eclipse, IntelliJ or whatever option you prefer and compile/execute.
 
 ## License
 
