@@ -1,4 +1,4 @@
-# Basic Data Structure (Class notes and codes)
+# Basic Data Structure II (Class notes and codes)
 
 I'm storing here assignements given in Basic Data Structures II classes. Each directory has its own README with instructions.
 
