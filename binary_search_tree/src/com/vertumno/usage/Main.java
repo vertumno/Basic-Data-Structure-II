@@ -2,8 +2,17 @@ package com.vertumno.usage;
 
 import com.vertumno.binary_search_tree.BinarySearchTree;
 
+/**
+ * This is the main class, where some Users are instantiated and inserted on the BST.
+ * After this, strategic Nodes are deleted only to show that everything is working fine.
+ */
 public class Main
 {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main (String[] args)
     {
         User u1 = new User(50);

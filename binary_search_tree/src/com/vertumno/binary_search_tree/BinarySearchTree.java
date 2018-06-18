@@ -2,9 +2,14 @@ package com.vertumno.binary_search_tree;
 
 public class BinarySearchTree
 {
-    private Node root;
+    public static Node root;
+    private int size;
 
-    public BinarySearchTree () { root = new Node(null); }
+    public BinarySearchTree ()
+    {
+        root = null;
+        size = 0;
+    }
 
     public void insert (Object data)
     {
@@ -15,6 +20,7 @@ public class BinarySearchTree
         if ( root == null )
         {
             root = next;
+            this.size++;
             return;
         }
 
@@ -41,10 +47,11 @@ public class BinarySearchTree
                 // This is an available position to be inserted?
                 if ( jumper == null )
                 {
-                   beforeJumper.left = next;
-                   next.parent = beforeJumper;
-                   next.isLeftChild = true;
-                   return;
+                    beforeJumper.left = next;
+                    next.parent = beforeJumper;
+                    next.isLeftChild = true;
+                    this.size++;
+                    return;
                 }
             }
             else
@@ -57,10 +64,25 @@ public class BinarySearchTree
                     beforeJumper.right = next;
                     next.parent = beforeJumper;
                     next.isLeftChild = false;
+                    this.size++;
                     return;
                 }
             }
         }
+    }
+
+    public Node findNode(int key)
+    {
+        ComparatorClass compare = new ComparatorClass();
+        Node jumper = root;
+        while (jumper != null)
+        {
+            int result = compare.compareKeys(jumper.data, key);
+            if ( result == 0 ) { return jumper; }
+            else if ( result == -1 ) { jumper = jumper.left; }
+            else { jumper = jumper.right; }
+        }
+        return null;
     }
 
     public Object find (int key)
@@ -71,13 +93,24 @@ public class BinarySearchTree
         return null;
     }
 
-    public void printTree() { TreePrinter.print(root); }
+    public void printTree()
+    {
+        TreePrinter.print(root);
+    }
 
-    public boolean delete(int key)
+    public Node findSuccessor(Node current)
+    {
+        // You only need to go right once, then you go down the tree by the left
+        current = current.right;
+        while(current.left != null) current = current.left;
+        return current;
+    }
+
+    public void delete(int key)
     {
         // Finding the Object to be deleted
         Node toDelete = findNode(key);
-        if (toDelete == null) { return false; }
+        if (toDelete == null) { return; }
 
         // We have to see if this deletion falls in which of the three cases.
 
@@ -107,29 +140,5 @@ public class BinarySearchTree
             toDelete.data = successor.data;
             successor.parent.left = null;
         }
-
-        return true;
-    }
-
-    private Node findSuccessor(Node current)
-    {
-        // You only need to go right once, then you go down the tree by the left
-        current = current.right;
-        while(current.left != null) current = current.left;
-        return current;
-    }
-
-    private Node findNode(int key)
-    {
-        ComparatorClass compare = new ComparatorClass();
-        Node jumper = root;
-        while (jumper != null)
-        {
-            int result = compare.compareKeys(jumper.data, key);
-            if ( result == 0 ) { return jumper; }
-            else if ( result == -1 ) { jumper = jumper.left; }
-            else { jumper = jumper.right; }
-        }
-        return null;
     }
 }
