@@ -1,17 +1,26 @@
 package com.vertumno.binary_search_tree;
 
+/**
+ * @author Lucas Gomes Dantas
+ * @date June the 18th, 2018
+ * My implementation of a simple Binary Search Tree, developed while studying at UFRN, Brazil.
+ */
 public class BinarySearchTree
 {
-    public static Node root;
-    private int size;
+    private Node root;
 
-    public BinarySearchTree ()
-    {
-        root = null;
-        size = 0;
-    }
+    /**
+     * Instantiates a new Binary Search Tree.
+     */
+    public BinarySearchTree () { root = null; }
 
-    public void insert (Object data)
+    /**
+     * Insert a new element at this Tree, after finding its proper position (e.g. at the left or right of an element)
+     *
+     * @param data Object to be inserted at the Tree
+     * @return True if insertion goes well, false otherwise
+     */
+    public boolean insert (Object data)
     {
         // Creates a node with the given data
         Node next = new Node(data);
@@ -20,8 +29,7 @@ public class BinarySearchTree
         if ( root == null )
         {
             root = next;
-            this.size++;
-            return;
+            return true;
         }
 
         // If it gets here, the Tree is not empty and we must check where to insert
@@ -50,8 +58,7 @@ public class BinarySearchTree
                     beforeJumper.left = next;
                     next.parent = beforeJumper;
                     next.isLeftChild = true;
-                    this.size++;
-                    return;
+                    return true;
                 }
             }
             else
@@ -64,27 +71,18 @@ public class BinarySearchTree
                     beforeJumper.right = next;
                     next.parent = beforeJumper;
                     next.isLeftChild = false;
-                    this.size++;
-                    return;
+                    return true;
                 }
             }
         }
     }
 
-    public Node findNode(int key)
-    {
-        ComparatorClass compare = new ComparatorClass();
-        Node jumper = root;
-        while (jumper != null)
-        {
-            int result = compare.compareKeys(jumper.data, key);
-            if ( result == 0 ) { return jumper; }
-            else if ( result == -1 ) { jumper = jumper.left; }
-            else { jumper = jumper.right; }
-        }
-        return null;
-    }
-
+    /**
+     * Find the object inside the Tree that matches a given key.
+     *
+     * @param key Key that should match an object
+     * @return The found object, or null if not found
+     */
     public Object find (int key)
     {
         Node found = findNode(key);
@@ -93,24 +91,26 @@ public class BinarySearchTree
         return null;
     }
 
-    public void printTree()
-    {
-        TreePrinter.print(root);
-    }
+    /**
+     * Call method print of class TreePrinter and it will print all elements stored in this Tree.
+     */
+    public void printTree() { TreePrinter.print(root); }
 
-    public Node findSuccessor(Node current)
-    {
-        // You only need to go right once, then you go down the tree by the left
-        current = current.right;
-        while(current.left != null) current = current.left;
-        return current;
-    }
-
-    public void delete(int key)
+    /**
+     * Deletes an element that matches the given key. It treats and observes the four deletion cases:
+     * 1 - No element matches the given key
+     * 2 - Node to be deleted is leaf
+     * 3 - Node to be deleted has one child
+     * 4 - Node to be deleted has two children
+     *
+     * @param key Key to search an element to be matched
+     * @return True if deletion goes well, false otherwise
+     */
+    public boolean delete(int key)
     {
         // Finding the Object to be deleted
         Node toDelete = findNode(key);
-        if (toDelete == null) { return; }
+        if (toDelete == null) { return false; }
 
         // We have to see if this deletion falls in which of the three cases.
 
@@ -140,5 +140,29 @@ public class BinarySearchTree
             toDelete.data = successor.data;
             successor.parent.left = null;
         }
+
+        return true;
+    }
+
+    private Node findSuccessor(Node current)
+    {
+        // You only need to go right once, then you go down the tree by the left
+        current = current.right;
+        while(current.left != null) current = current.left;
+        return current;
+    }
+
+    private Node findNode(int key)
+    {
+        ComparatorClass compare = new ComparatorClass();
+        Node jumper = root;
+        while (jumper != null)
+        {
+            int result = compare.compareKeys(jumper.data, key);
+            if ( result == 0 ) { return jumper; }
+            else if ( result == -1 ) { jumper = jumper.left; }
+            else { jumper = jumper.right; }
+        }
+        return null;
     }
 }
