@@ -1,4 +1,4 @@
-# Trees - Implementing a Binary Search Tree
+# Trees - Implementing a Binary Search Tree (BST)
 
 In the present repository I'm storing the codes created to implement a Binary Search Tree.
 
@@ -6,13 +6,12 @@ In the present repository I'm storing the codes created to implement a Binary Se
 
 ## Implemented functions
 
-* <code>public void insert(String data)</code> - Receives one string with the word to be stored and saves it on the Trie;
-* <code>public boolean search(String word)</code> - Searches if a given word exists on the Trie;
-* <code>public void print()</code> - Prints all the words stored within the Trie;
-* <code>public ArrayList<String> getWordsFromPrefix(String prefix)</code> - Receives a prefix (it does not matter if the prefix is a full word) and searchs for all words derived from this prefix.
-* <code>public boolean delete(String word)</code> - Deletes a given word from within the Trie.
+* <code>public boolean insert (Object data)</code> - Receives one Object and stores it a its proper position on Tree;
+* <code>public Object find (int key)</code> - Searches for an object inside the Tree that matches the given key;
+* <code>public void printTree()</code> - Calls function print() from class TreePrinter and prints to client all the values stored within the BST;
+* <code>public boolean delete(int key)</code> - Deletes an Object from the BST that matches the given key.
 
-There are some private helper functions, you can find them by checking the <code>RadixTrie.java</code> file.
+There are some private helper functions, you can find them by checking the <code>BinarySearchTree.java</code> file.
 
 Also, do not forget to check out <code>Node.java</code>, the Node structure was hidden from this README. 
 
