@@ -9,6 +9,6 @@ public class Main
         RadixTrie rt = new RadixTrie();
         String[] toInsert = {"the", "a", "there", "answer", "any", "by", "bye", "their"};
         for(String e : toInsert) rt.insert(e);
-        rt.getWordsFromPrefix("the");
+        rt.print();
     }
 }
